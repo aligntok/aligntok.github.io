@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Total .">
+  <meta name="keywords" content="implicit funciton, near-periodic patterns, image completion, texture synthesis">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="./static/images/thumbnail2.png"/>
+  <link rel="image_src" href="./static/images/thumbnail2.png">
+  <link rel="icon"
+        type="image/x-icon"
+        href="./static/images/favicon.ico"/>
+
+  <title> Inverse Painting:  Reconstructing The Painting Process</title>
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RLCVEPCTJV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RLCVEPCTJV');
+</script>
+  <script type="module"
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+
+</head>
+<body>
+
+
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://homes.cs.washington.edu/~boweiche/">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://inversepainting.github.io/">
+            Inverse Painting
+          </a>
+            <a class="navbar-item" href="https://homes.cs.washington.edu/~boweiche/project_page/totalselfie/">
+            Total Selfie: Generating Full-Body Selfies
+          </a>
+          <a class="navbar-item" href="https://armastuschen.github.io/projects/NPP_Net/">
+            NPP-Net
+          </a>
+          <a class="navbar-item" href="http://www.cs.cmu.edu/~ILIM/projects/AA/ZindDecomp/">
+            Virtual Staging for Empty Home
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">
+          Aligning Visual Foundation Encoders to Tokenizers for Diffusion Models
+        </h1>
+            <!-- <h2 class="subtitle is-4 publication-subtitle">
+        SIGGRAPH Asia 2024
+    </h2> -->
+
+    <div class="is-size-5 publication-authors">
+      <span class="author-block">
+        <span class="author-block"> <a href="https://homes.cs.washington.edu/~boweiche/">Bowei Chen</a><sup>1</sup>,</span>
+        <span class="author-block"> <a href="https://sai-bi.github.io/">Sai Bi</a><sup>2</sup>,</span>
+        <span class="author-block"> <a href="https://www.cs.unc.edu/~airsplay/">Hao Tan</a><sup>2</sup>,</span>
+        <span class="author-block"> <a href="https://sites.google.com/site/hezhangsprinter">He Zhang</a><sup>2</sup>,</span>
+        <span class="author-block"> <a href="https://tianyuanzhang.com/">Tianyuan Zhang</a><sup>3</sup>,</span>
+        <span class="author-block"> <a href="https://zhengqili.github.io/">Zhengqi Li</a><sup>2</sup>,</span>
+        <span class="author-block"> <a href="https://yjxiong.me/">Xiong Yuanjun</a><sup>2</sup>,</span>
+        <span class="author-block"> <a href="https://jimmie33.github.io/">Jianming Zhang</a><sup>2</sup>,</span>
+        <span class="author-block"> <a href="https://kai-46.github.io/website/">Kai Zhang</a><sup>2</sup></span>
+      </span>
+
+      <br>
+      <span class="author-block">
+        <span class="author-block"><sup>1</sup> University of Washington &nbsp;&nbsp;</span>
+        <span class="author-block"><sup>2</sup>Adobe &nbsp;&nbsp;</span>
+        <span class="author-block"><sup>3</sup> Massachusetts Institute of Technology &nbsp;&nbsp;</span>
+      </span>
+
+      <br>
+
+
+
+
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <!-- PDF Link. -->
+            <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+            </span>
+            <!-- <span class="link-block">
+              <a href="https://github.com/ArmastusChen/inverse_painting"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+                </a>
+            </span> -->
+<!--              <span class="link-block">
+                <a href="./static/bibtex.bib"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Bibtex</span>
+                </a>
+              </span>
+            <span class="link-block">
+                <a href="./static/poster.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Poster</span>
+                </a>
+              </span> -->
+            <!-- Dataset Link. -->
+<!--             <span class="link-block">
+              <a href="https://github.com/google/hypernerf/releases/tag/v0.1"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="far fa-images"></i>
+                </span>
+                <span>Data</span>
+                </a>
+              </span> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            In this work, we propose aligning pretrained visual encoders to serve as tokenizers for latent diffusion models in image generation. Unlike training a variational autoencoder (VAE) from scratch, which primarily emphasizes low-level details, our approach leverages the rich semantic structure of foundation encoders.
+We introduce a three-stage alignment strategy: (1) freeze the encoder and train an adapter and a decoder to establish a semantic latent space; (2) jointly optimize all components with an additional semantic preservation loss, enabling the encoder to capture perceptual details while retaining high-level semantics; and (3) refine the decoder for improved reconstruction quality.
+This alignment yields semantically rich image tokenizers that benefit diffusion models.
+On ImageNet 256x256, our tokenizer accelerates the convergence of diffusion models, reaching a gFID of 1.90 within just 64 epochs, and improves generation both with and without classifier-free guidance. Scaling to LAION, a 2B-parameter text-to-image model trained with our tokenizer consistently outperforms FLUX VAE under the same training steps. Overall, our method is simple, scalable, and establishes a semantically grounded paradigm for continuous tokenizer design.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+
+<hr/>
+
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Key Idea</h2>
+        <div class="content has-text-justified">
+                <div class="has-text-centered">
+        <img style="width: 100%;" src="./static/images/intro.jpg"
+             alt=" architecture."/>
+      </div>
+      <p>
+        Our goal is to design an image tokenizer with stronger semantic grounding -- hence better diffusability -- with competitive reconstruction ability.
+        Our intuition is that learning semantic is inherently more difficult than learning reconstruction.
+        Thus, we take a different perspective: rather than forcing the encoder to learn semantics from scratch like previous work (left), we align a pretrained visual foundation encoder (e.g., DINOv2) to a visual tokenizer (right). 
+        Since the encoder already captures rich semantic structure, our alignment makes the first task -- learning a diffusion-friendly latent space (i.e., achieving strong diffusability) -- much easier. 
+      </p>
+
+        </div>
+      </div>
+    </div>
+
+
+    <hr/>
+
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Three-Stage Alignment</h2>
+        <div class="content has-text-justified">
+          <div class="has-text-centered">
+            <img style="width: 100%;" src="./static/images/pipeline.jpg"
+                 alt="architecture."/>
+          </div>
+          <p>
+            <b>Stage 1: Latent Alignment (top).</b>
+            The pretrained encoder is kept frozen, while the adapter and decoder are trained with reconstruction loss to align its output into a semantically grounded latent space for generation.
+            <br/>
+            <b>Stage 2: Perceptual Alignment (bottom left).</b>
+            All components are optimized jointly to enrich the latent space with low-level details, while a semantic preservation loss ensures that it retains high-level semantics.
+            <br/>
+            <b>Stage 3: Decoder Refinement (bottom right).</b>
+            Only the decoder is fine-tuned with reconstruction loss to enhance reconstruction fidelity.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+
+
+
+
+
+<hr/>
+
+
+<div class="columns is-centered has-text-centered">
+  <div class="column is-four-fifths">
+    <h2 class="title is-3">Results on ImageNet 256x256</h2>
+    </div>
+
+</div>
+
+
+<hr/>
+
+
+
+<div class="columns is-centered has-text-centered">
+  <div class="column is-four-fifths">
+    <h2 class="title is-5">Comparison of Sampling Steps, CFG Scales, Convergence Speed</h2>
+    <div class="content has-text-justified">
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="./static/images/imagenet_comparison.png"
+             alt="architecture."/>
+      </div>
+      <p>
+        <i>Left</i>: effect of sampling steps versus gFID at 80K training steps.  
+        <i>Middle</i>: effect of CFG scale versus gFID at 80K training steps with 30 sampling steps. 
+        <i>Right</i>: effect of training steps versus gFID with 30 sampling steps. QKNorm is enabled during extended training to ensure stability.
+        All gFIDs in the left and right figures are reported using the best-searched CFG scale.  
+        Our method has faster convergence speed and achieves better results with fewer sampling steps and smaller CFG scales.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<hr/>
+
+
+
+
+<div class="columns is-centered has-text-centered">
+  <div class="column is-four-fifths">
+    <h2 class="title is-5">System-Level Comparison</h2>
+    <div class="content has-text-justified">
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="./static/images/imagenet_system.png"
+             alt="architecture."/>
+      </div>
+      <p>
+         Gray and purple regions refer to LightningDiT trained for 64 epochs (80K training steps, no QKNorm) and 800 (1M training steps, with QKNorm) epochs, respectively. 
+        Bold numbers indicate the best result in each color block. When comparing our method to VA-VAE at 64 epochs (80K training steps), we surpass it in both reconstruction and generation quality, highlighting our superior convergence speed. For the 800-epoch setting (1M training steps), we retrain LightningDiT of VA-VAE using the official repository with QKNorm enabled -- necessary to avoid loss spikes, but slightly degrade generative performance, as noted by the authors. 
+        Our method (with QKNorm) achieves a gFID of 1.37, outperforming VA-VAE’s 1.52 (with QKNorm) and comparable to the original VA-VAE result of 1.35 (without QKNorm) reported in their paper.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<hr/>
+
+
+<div class="columns is-centered has-text-centered">
+  <div class="column is-four-fifths">
+    <h2 class="title is-3">Results on Text-To-Image Generation</h2>
+    </div>
+
+</div>
+
+
+<hr/>
+
+
+
+<div class="columns is-centered has-text-centered">
+  <div class="column is-four-fifths">
+    <h2 class="title is-5">Comparison with FLUX VAE at 256x256 Resolution</h2>
+    <a class="title is-6" href="t2i_256.html" style="color: #007bff;">Click for More Results</a>
+    <div class="content has-text-justified">
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="./static/images/t2i_256_comparison.png"
+             alt="architecture."/>
+      </div>
+      <p>
+        Input text prompts are shown below the images and results are generated from generative models trained for 100K steps. 
+        Our method (bottom row) produces images with better coherence and prompt alignment compared to the one using FLUX VAE (top row).
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<hr/>
+
+
+
+<div class="columns is-centered has-text-centered">
+  <div class="column is-four-fifths">
+    <h2 class="title is-5">Our Results at 512 Resolution</h2>
+    <a class="title is-6" href="t2i_512.html" style="color: #007bff;">Click for More Results</a>
+    <div class="content has-text-justified">
+      <div class="has-text-centered">
+        <img style="width: 100%;" src="./static/images/t2i_512.png"
+             alt="architecture."/>
+      </div>
+      <p>
+        The input text prompts are shown below the images. Results are obtained from diffusion models trained for 290K steps. The first four are square images, and the final one has a 4:5 aspect ratio.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+<hr/>
+
+
+
+ <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered ">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 has-text-centered">Acknowledgements</h2>
+             <p>
+               Special thanks to 
+               <a href="https://yuqunw.github.io">Yuqun Wu</a>,
+               <a href="https://harrywang355.github.io/">Yuanhao "Harry" Wang</a> for their help in proofreading the paper.
+      </p>
+      <p style="margin-top: 1rem;">
+        This work was done while Bowei Chen and Tianyuan Zhang were interning at Adobe. We would like to thank <a href="https://sites.google.com/view/hailinjin">Hailin Jin</a> for his valuable support throughout the internship.      </p>
+
+        </div>
+      </div>
+    </div>
+
+
+</section>
+
+<hr/>
+
+
+
+<script type="text/javascript" src="./static/slick/slick.min.js"></script>
+</body>
+</html>
